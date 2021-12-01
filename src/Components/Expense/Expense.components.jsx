@@ -2,19 +2,21 @@ import "../ExpenseDate/ExpenseDate.components"
 import "../Expense/Expense.styles.css"
 import ExpenseItem from "../ExpenseItem/ExpenseItem.components"
 import ExpensesFilter from "../ExpenseFilter/ExpenseFilter.components"
+import { useState } from "react"
 
 function Expense(props) {
-  const expenseFilterYear = (yearFound) => {
-    console.log("Succesfully got :"+yearFound)
+  const [filteredYear, setFileteredYear] = useState("2020")
+  const expenseFilterYear = (selectedYear) => {
+    setFileteredYear(selectedYear)
   }
   return (
     <div>
-      <ExpensesFilter onYearChange={expenseFilterYear} />
       <div className="expenses">
-        <ExpenseItem data={props.data[0]} />
-        <ExpenseItem data={props.data[1]} />
-        <ExpenseItem data={props.data[2]} />
-        <ExpenseItem data={props.data[3]} />
+        <ExpensesFilter selected={filteredYear} onYearChange={expenseFilterYear} />
+
+        {props.items.map((expense) => {
+          return <ExpenseItem title={expense.title} amount={expense.amount} date={expense.date} />
+        })}
       </div>
     </div>)
 }
