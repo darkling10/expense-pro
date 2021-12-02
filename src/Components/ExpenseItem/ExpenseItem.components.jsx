@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../ExpenseItem/ExpenseItem.styles.css'
 import ExpenseDate from '../ExpenseDate/ExpenseDate.components';
 
